@@ -1,0 +1,176 @@
+<template>
+
+    <!-- Header Section -->
+    <header class="slds-modal__header slds-theme_shade">
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>Assignment Rule</b></h2>
+    </header>
+    <!-- Body starts here -->
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        
+        <!-- Box one start  -->
+        <div class="slds-box slds-box_xx-small slds-theme_alert-texture"> <p >Step 1: Rule details</p></div>
+        <div class=" slds-grid slds-wrap slds-box slds-box_xx-small slds-theme_shade ">
+
+            <!-- First line start     -->
+            <div class="slds-size_6-of-12 ">
+                <div class="slds-m-around_x-small">
+            <lightning-input type="text" label="Rule Name" name="conRuleName"></lightning-input>
+                </div>
+            </div>
+    
+            <div class="slds-size_6-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Active" placeholder="Select Active Status" options={} name="conActive"></lightning-combobox>
+                </div>
+            </div>
+
+            <!-- First line start end    -->
+            </div>
+                <!-- Box one end  -->
+    
+            <br>
+
+            <!-- Box two start  -->
+        <div class="slds-box slds-box_xx-small slds-theme_alert-texture"> <p >Step 2: Select Object and set the rule order</p></div> 
+        <div class=" slds-grid slds-wrap slds-box slds-box_xx-small slds-theme_shade ">
+            <!-- Second line start     -->
+            <div class="slds-size_6-of-12 ">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox  label="Select Object" placeholder="Select Object" options={sObjects} name="conSelectObject" onchange={handleChange}></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_6-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-input type="number" label="Sort Order" name="conSortOrder"></lightning-input>
+                </div>
+            </div>
+            <!-- Second line start end    -->
+            </div>
+                <!-- Box two end  -->
+    
+                <br>
+
+
+            <!-- Box three start  -->
+        <div class="slds-box slds-box_xx-small slds-theme_alert-texture"> <p >Step 3: Select the Criteria</p></div> 
+        <div class=" slds-grid slds-wrap slds-box slds-box_xx-small slds-theme_shade ">
+            <!-- Third line start     -->
+            <!-- one -->
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Select Criteria Option" placeholder="None" options={} name="conSelectCriteriaOption"></lightning-combobox>
+                </div>
+            </div>
+             <div class="slds-size_8-of-12"></div>
+
+            <!-- two -->
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Field" placeholder="None"  options={fields} name="conField" onchange={handleChange} ></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Operator" placeholder="None" options={} name="conOperator"></lightning-combobox>
+                </div>
+            </div>
+            <template if:true={isPickList}>
+                <lightning-combobox label="Value" placeholder="None"  options={pickListValuesOption} name="pickListOption" onchange={handleChange} ></lightning-combobox>
+            </template>
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-input type="Text" label="Value" name="conValue"></lightning-input>
+                </div>
+            </div>
+    
+            <br>
+            <!-- three -->
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Field" placeholder="None" options={} name="conField"></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Operator" placeholder="None" options={} name="conOperator"></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-input type="Text" label="Value" name="conValue"></lightning-input>
+                </div>
+            </div>
+    
+            <br>
+            <!-- four -->
+                <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Field" placeholder="None" options={} name="conField"></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="Operator" placeholder="None" options={} name="conOperator"></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_4-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-input type="Text" label="Value" name="conValue"></lightning-input>
+                </div>
+            </div>
+            
+            <!-- add Button -->
+            <lightning-button-icon icon-name="utility:add"  variant="border-filled" title="Refresh" class="slds-m-around_x-small" slot="actions" onclick={refreshMethod}></lightning-button-icon>
+    
+            <!-- Third line start end    -->
+            </div>
+            <!-- Box three end  -->
+    
+            <br>
+
+            <!-- Box four start  -->
+        <div class="slds-box slds-box_xx-small slds-theme_alert-texture"> <p >Step 4: Select the user or queue to assign</p></div> 
+        <div class=" slds-grid slds-wrap slds-box slds-box_xx-small slds-theme_shade ">
+            <!-- Fourth line start     -->
+            <div class="slds-size_6-of-12 ">
+                <div class="slds-m-around_x-small">
+            <lightning-combobox label="User/Queue" placeholder="None" options={} name="conUser_Queue"></lightning-combobox>
+                </div>
+            </div>
+    
+            <div class="slds-size_6-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-input type="search" label="Email Template" name="conEmailTemplate"></lightning-input>
+                </div>
+            </div>
+    
+            <br>
+            
+            <!-- 3 Buttons starts here  -->
+            <div class="slds-col slds-p-around_large slds-size_12-of-12 slds-align_absolute-center">
+                     <button class="slds-button slds-button_brand slds-m-horizontal_large" onclick={filter} title="Save">Save</button>
+                     <button class="slds-button slds-button_brand slds-m-horizontal_large" onclick={filter} title="Save and New">Save and New</button>
+                     <button class="slds-button slds-button_brand slds-m-horizontal_large" onclick={filter} title="Cancel">Cancel</button>
+            </div>
+            <!-- 3 Buttons ends here  -->
+            <!-- Fourth line start end    -->
+            </div>
+                <!-- Box four end  -->
+    
+            
+    </div>
+    <!-- Body ends here -->
+
+    <!-- Footer starts here -->
+    <footer class="slds-modal__footer">
+        <button class="slds-button slds-button_neutral"  title="Cancel">Cancel</button>
+        <button class="slds-button slds-button_brand"  title="Submit">Submit</button>
+    </footer>
+        
+    </template>

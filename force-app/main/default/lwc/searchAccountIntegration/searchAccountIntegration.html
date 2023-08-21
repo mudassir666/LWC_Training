@@ -1,0 +1,41 @@
+<template>
+    <lightning-card>
+        <lightning-input style="padding: 10px;" type="text" label="Search" value={searchTerm} onchange={handleSearch}></lightning-input>
+        <ul style="padding: 10px;">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+                <thead>
+                    <tr class="slds-line-height_reset">    
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="Id">Id</div>
+                    </th>
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={filteredAccountRecord} for:item="record">
+                        <tr key={record.Id} class="slds-hint-parent">
+                            <td>{record.Id}</td>
+                            <td>{record.Name}</td>
+                        </tr>
+                        <!-- <li key={record.name}>{record.Name}</li> -->
+                      </template>
+                </tbody>
+            </table>   
+          <!-- <template for:each={filteredAccountRecord} for:item="record">
+            <tr key={record.Id} class="slds-hint-parent">
+                <td>{record.Id}</td>
+                <td>{record.Name}</td>
+            </tr>
+            <li key={record.name}>{record.Name}</li>
+          </template> -->
+        </ul>
+        <!-- <lightning-input type="text" label="Search" value={searchTerm} onchange={handleSearch}></lightning-input>
+  <ul>
+    <template for:each={filteredFruits} for:item="fruit">
+      <li key={fruit.name}>{fruit.name} - {fruit.price}</li>
+    </template>
+  </ul> -->
+    </lightning-card>
+  </template>

@@ -1,0 +1,74 @@
+<template>
+    <!-- lightning button for open modal window -->
+    <lightning-button variant="brand"
+    label="Create"
+    title="Create"
+    onclick={openModal}
+    class="slds-m-left_x-small">
+    </lightning-button>
+    <!--Use template if:true to display/hide popup based on isModalOpen value--> 
+    <template if:true={isModalOpen}>
+    <!-- Modal/Popup Box LWC starts here -->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large" >
+    <div class="slds-modal__container"  >
+    <!-- Modal/Popup Box LWC header here -->
+    <header class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+            <lightning-icon icon-name="utility:close"
+                alternative-text="close"
+                variant="inverse"
+                size="small" ></lightning-icon>
+            <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Contact Form</h2>
+    </header>
+    <!-- Modal/Popup Box LWC body starts here -->
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        
+        
+            <div class=" slds-grid slds-wrap">
+            <!-- First line start     -->
+            <div class="slds-size_6-of-12 ">
+                <div class="slds-m-around_x-small">
+            <lightning-input 
+            type="text" 
+            label="First Name"
+            name="conFirstName"
+            value={contact.FirstName}
+            required
+            message-when-value-missing="Please Enter First Name"
+            data-field="inpt"
+            onchange={handleChange}
+            ></lightning-input>
+                </div>
+            </div>
+    
+            <div class="slds-size_6-of-12">
+                <div class="slds-m-around_x-small">
+            <lightning-input  
+            type="text" 
+            label="Last Name"
+            required
+            message-when-value-missing="Please Enter Last Name"
+            data-field="inpt"
+            name="conLastName"
+            value={contact.LastName}
+            onchange={handleChange}
+            ></lightning-input>
+                </div>
+            </div>
+            <!-- First line start end    -->
+           
+            </div>
+    </div>
+    <!-- Modal/Popup Box LWC footer starts here -->
+    <footer class="slds-modal__footer">
+        <p>{accid}</p>
+        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+        <button class="slds-button slds-button_brand" onclick={handleSubmit} title="Submit">Submit</button>
+    </footer>
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    </template>

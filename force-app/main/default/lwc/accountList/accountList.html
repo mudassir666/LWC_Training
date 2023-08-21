@@ -1,0 +1,283 @@
+<template>
+<lightning-card title={accountCount} icon-name="custom:custom14">
+    
+    <div>
+       
+        <!-- // Row Consisting Input tabs -->
+        <!-- <div class="slds-align_absolute-center"></div> -->
+        <div class="slds-grid slds-gutters slds-p-left_large"> 
+            <div class="slds-col">
+                <lightning-combobox 
+                label="Ownership" 
+                placeholder="Select Ownership" 
+                options={OwnershipOptions} 
+                name="accOwnership"
+                value={Ownership}
+                onchange={handleChange} 
+        ></lightning-combobox>
+            </div>
+        
+            <div class="slds-col">
+                <lightning-combobox 
+                label="Industry" 
+                placeholder="Select Industry" 
+                options={IndustryOptions} 
+                name="accIndustry"
+                value={Industry}
+                onchange={handleChange} 
+        ></lightning-combobox>
+            </div>
+        
+            <div class="slds-col">
+                <lightning-combobox 
+                label="No. of Employees" 
+                placeholder="Select No. of Employees" 
+                options={NoOfEmployeesOptions} 
+                name="accNoOfEmployees"
+                value={NoOfEmployees}
+                onchange={handleChange} 
+        ></lightning-combobox>
+            </div>
+
+            <div class="slds-col">
+                <lightning-combobox 
+                label="State" 
+                placeholder="Select State" 
+                options={StateCodesOptions} 
+                name="accState"
+                value={State}
+                onchange={handleChange} 
+        ></lightning-combobox>
+            </div>
+
+            <!-- <div class="slds-col">
+                <select class="slds-select" >
+                    <option value="Select">Select</option>
+                    <template for:each={StateCodesOptions} for:item="option">
+                        <option key={option.label} class="uiInputSelectOption" value={option.value}>{option.value}</option>
+                    </template>
+                </select>
+            </div> -->
+        
+            <div class="slds-col slds-p-around_large ">
+                 <button class="slds-button slds-button_brand" onclick={filter} title="Search">Search</button>
+                 <button class="slds-button slds-button_brand" onclick={init} title="Reset">Reset</button>
+            </div>
+        
+         </div>
+        <!-- end -->
+
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+            
+            <!-- <thead>
+                <tr>
+                <th >Name</th>
+                <th >Email</th>
+                <th class="tableHead">Designation</th>
+                <th class="tableHead">Phone</th>
+                <th class="tableHead">Is Primary Contact</th>
+                <th class="tableHead">Area of Practice</th>
+                </tr>
+            </thead> -->
+
+            <thead>
+                <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Radio"></div>
+                </th>    
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Name">Name</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Industry">Industry</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Rating">Rating</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Ownership">Ownership</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Confidence">Annual Revenue</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="CreatedDate">Created Date</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="NoOfEmployees">No. Of Employees</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="ShippingCity">Shipping City</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="ShippingCountry">Shipping Country</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="ShippingState">Shipping State</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="StateCode">State Code</div>
+                </th>
+                </tr>
+                </thead>
+
+            <tbody>
+                <template for:each={recordsToDisplay} for:item=account>
+                <tr key={account.Id} class="slds-hint-parent">
+                    <td>
+                        <lightning-input name="radio" type="radio" onclick={storeAccoundIdMethod} value={account.Id} checked={account.selected}></lightning-input>
+                        <!-- <div class="radio">
+                            <label><input name="radio" type="radio" onclick={storeAccoundIdMethod} value={account.Id}></label>
+                        </div> -->
+                    </td>
+                    <td><a onclick={handleNavigateToAccount} data-contid={account.Id}>{account.Name}</a></td>
+                    <td>{account.Industry}</td>
+                    <td>{account.Rating}</td>
+                    <td>{account.Ownership}</td>
+                    <td>{account.AnnualRevenue}</td>
+                    <td>{account.CreatedDate}</td>
+                    <td>{account.NumberOfEmployees}</td>
+                    <td>{account.ShippingCity}</td>
+                    <td>{account.ShippingCountry}</td>
+                    <td>{account.ShippingState}</td>
+                    <td>{account.ShippingStateCode}</td>
+                </tr>
+                </template>
+            </tbody>
+            
+            <!-- <tbody>
+                <template iterator:it={recordsToDisplay} >
+                <tr key={it.value.Id} class="slds-hint-parent">
+                    <td if:true={it.first}>
+                        <lightning-input name="radio" type="radio" onclick={storeAccoundIdMethod} value={it.value.Id} checked></lightning-input>
+                    </td> 
+                    <td if:false={it.first}>
+                        <lightning-input name="radio" type="radio" onclick={storeAccoundIdMethod} value={it.value.Id} ></lightning-input>
+                    </td>
+                    <td><a onclick={handleNavigateToAccount} data-contid={it.value.Id}>{it.value.Name}</a></td>
+                    <td>{it.value.Industry}</td>
+                    <td>{it.value.Rating}</td>
+                    <td>{it.value.Ownership}</td>
+                    <td>{it.value.AnnualRevenue}</td>
+                    <td>{it.value.CreatedDate}</td>
+                    <td>{it.value.NumberOfEmployees}</td>
+                    <td>{it.value.ShippingCity}</td>
+                    <td>{it.value.ShippingCountry}</td>
+                    <td>{it.value.ShippingState}</td>
+                    <td>{it.value.ShippingStateCode}</td>
+                </tr>
+            </template>
+            </tbody> -->
+            
+            
+
+<!-- 
+            <tbody>
+                <tr class="slds-hint-parent">
+                <th data-label="Opportunity Name" scope="row">
+                <div class="slds-truncate" title="Cloudhub">
+                <a href="#" tabindex="-1">Cloudhub</a>
+                </div>
+                </th>
+                <td data-label="Account Name">
+                <div class="slds-truncate" title="Cloudhub">Cloudhub</div>
+                </td>
+                <td data-label="Close Date">
+                <div class="slds-truncate" title="4/14/2015">4/14/2015</div>
+                </td>
+                <td data-label="Prospecting">
+                <div class="slds-truncate" title="Prospecting">Prospecting</div>
+                </td>
+                <td data-label="Confidence">
+                <div class="slds-truncate" title="20%">20%</div>
+                </td>
+                <td data-label="Amount">
+                <div class="slds-truncate" title="$25k">$25k</div>
+                </td>
+                <td data-label="Contact">
+                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                <a href="#" tabindex="-1">jrogers@cloudhub.com</a>
+                </div>
+                </td>
+                </tr>
+                <tr class="slds-hint-parent">
+                <th data-label="Opportunity Name" scope="row">
+                <div class="slds-truncate" title="Cloudhub + Anypoint Connectors">
+                <a href="#" tabindex="-1">Cloudhub + Anypoint Connectors</a>
+                </div>
+                </th>
+                <td data-label="Account Name">
+                <div class="slds-truncate" title="Cloudhub">Cloudhub</div>
+                </td>
+                <td data-label="Close Date">
+                <div class="slds-truncate" title="4/14/2015">4/14/2015</div>
+                </td>
+                <td data-label="Prospecting">
+                <div class="slds-truncate" title="Prospecting">Prospecting</div>
+                </td>
+                <td data-label="Confidence">
+                <div class="slds-truncate" title="20%">20%</div>
+                </td>
+                <td data-label="Amount">
+                <div class="slds-truncate" title="$25k">$25k</div>
+                </td>
+                <td data-label="Contact">
+                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                <a href="#" tabindex="-1">jrogers@cloudhub.com</a>
+                </div>
+                </td>
+                </tr>
+                </tbody> -->
+
+            </table>
+    </div>
+
+    <!-- pagination -->
+    <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+
+        <!--RECORDS PER PAGE-->
+        <!-- <div class="slds-col">
+            <div class="slds-list_inline slds-p-bottom_xx-small">
+                <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                <div class="slds-select_container">
+                    <select class="slds-select" id="recordsPerPage" onchange={handleRecordsPerPage}>
+                        <template for:each={pageSizeOptions} for:item="option">
+                            <option key={option} value={option}>{option}</option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+        </div> -->
+
+        <!--PAGE NAVIGATION-->
+        <div class="slds-align_absolute-center" style="height:5rem">
+            <lightning-button disabled={bDisableFirst} icon-name="utility:jump_to_left" label="First" class="slds-p-horizontal_x-small" alternative-text="first page" onclick={firstPage}></lightning-button>
+
+            <lightning-button disabled={bDisableFirst} icon-name="utility:chevronleft" label="Previous" alternative-text="Previous" onclick={previousPage}></lightning-button>
+            &nbsp;
+            <span class="slds-badge">Showing {pageNumber} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+            &nbsp;
+            <lightning-button disabled={bDisableLast} icon-name="utility:chevronright" label="Next" alternative-text="Next" onclick={nextPage} class="slds-p-horizontal_x-small" icon-position="right"></lightning-button>
+
+            <lightning-button disabled={bDisableLast} icon-name="utility:jump_to_right" label="Last" alternative-text="last page" onclick={lastPage} icon-position="right"></lightning-button>
+        </div>
+
+        <!--TOTAL RECORDS-->
+        <div class="slds-clearfix">
+            <div class="slds-float_right">
+                <span class="slds-badge"> Total Records: {totalRecords}</span>
+            </div>
+        </div>
+    </div>
+    <!-- pagination -->
+
+</lightning-card>
+
+<div style="padding-top: 15px;"></div>
+
+<lightning-card>
+  <div>
+    <c-contact-list accountid={storeAccountId}></c-contact-list>
+  </div>
+</lightning-card>
+</template>

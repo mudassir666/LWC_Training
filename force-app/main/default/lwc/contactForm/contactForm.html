@@ -1,0 +1,243 @@
+<template>
+<!-- lightning button for open modal window -->
+<lightning-button variant="brand"
+label="Create Contact"
+title="Create Contact"
+onclick={openModal}
+class="slds-m-left_x-small">
+</lightning-button>
+<!--Use template if:true to display/hide popup based on isModalOpen value--> 
+<template if:true={isModalOpen}>
+<!-- Modal/Popup Box LWC starts here -->
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large" >
+<div class="slds-modal__container"  >
+<!-- Modal/Popup Box LWC header here -->
+<header class="slds-modal__header">
+    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+        <lightning-icon icon-name="utility:close"
+            alternative-text="close"
+            variant="inverse"
+            size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+    </button>
+    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Contact Form</h2>
+</header>
+<!-- Modal/Popup Box LWC body starts here -->
+<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+    
+    
+        <div class=" slds-grid slds-wrap">
+        <!-- First line start     -->
+        <div class="slds-size_6-of-12 ">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="text" 
+        label="First Name"
+        name="conFirstName"
+        value={contact.FirstName}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-size_6-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-input  
+        type="text" 
+        label="Last Name"
+        required
+        message-when-value-missing="Please Enter Last Name"
+        data-field="inpt"
+        name="conLastName"
+        value={contact.LastName}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+        <!-- First line start end    -->
+
+        <!-- Second line start     -->
+        <div class="slds-size_4-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="email" 
+        label="Email"
+        required
+        message-when-value-missing="Please Enter Email Address"
+        data-field="inpt"
+        name="conEmail"
+        value={contact.Email}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-size_4-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="tel" 
+        label="Phone"
+        name="conPhone"
+        pattern="[0-9]{9}$"
+        message-when-pattern-mismatch="Please enter a valid Phone Number"
+        value={contact.Phone}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-size_4-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-combobox 
+        label="Designation" 
+        placeholder="Select Designation" 
+        options={designationOptions} 
+        name="conDesignation"
+        value={contact.Designation__c}
+        onchange={handleChange}
+        ></lightning-combobox>
+            </div>
+        </div>
+        <!-- Second line start end    -->
+
+        <!-- Third line start     -->
+        <div class="slds-size_6-of-12 ">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="date" 
+        label="Earliest Availability Date"
+        required
+        message-when-value-missing="Please Select a Date"
+        data-field="inpt"
+        name="conDate"
+        value={contact.Date}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-size_6-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="text" 
+        label="City"
+        name="conCity"
+        value={contact.City}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+        <!-- Third line start end    -->
+
+        <!-- Forth line start     -->
+        <div class="slds-size_12-of-12 ">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="text" 
+        label="Address"
+        required
+        message-when-value-missing="Please Enter Address"
+        data-field="inpt"
+        name="conAddress"
+        value={contact.Address}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+        <!-- Forth line start end    -->
+
+        <!-- Fifth line start     -->
+        <div class="slds-size_6-of-12 ">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="text" 
+        label="Postal Code"
+        name="conPostalCode"
+        value={contact.PostalCode}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-size_6-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-combobox 
+        label="Is Primary Contact" 
+        placeholder="Select Status" 
+        options={isPrimaryContactOptions} 
+        name="conIsPrimaryContact"
+        value={contact.Is_Primary_Contact__c}
+        onchange={handleChange} 
+        ></lightning-combobox>
+            </div>
+        </div>
+        <!-- Fifth line start end    -->
+
+        <!-- Sixth line start     -->
+        <div class="slds-size_6-of-12 ">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="text" 
+        label="Country"
+        name="conCountry"
+        value={contact.Country}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-size_6-of-12">
+            <div class="slds-m-around_x-small">
+        <lightning-input 
+        type="text" 
+        label="Area of Practice"
+        name="conAreaOfPractice"
+        value={contact.Area_of_Practice__c}
+        onchange={handleChange}
+        ></lightning-input>
+            </div>
+        </div>
+        <!-- Sixth line start end    -->
+
+        </div>
+
+    <!-- <lightning-layout>
+        <lightning-layout-item padding="around-small" class="slds-size_2-of-4">
+            <lightning-input type="text" label="First Name"></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" class="slds-size_2-of-4">
+            <lightning-input type="text" label="Last Name"></lightning-input>
+        </lightning-layout-item>
+    </lightning-layout>
+    <div class="slds-size_2-of-4">
+        <lightning-layout-item padding="around-small" >
+            <lightning-input type="text" label="First Name"></lightning-input>
+        </lightning-layout-item>
+    </div>
+    <lightning-input type="text" label="First Name"></lightning-input>
+    <lightning-input type="text" label="Last Name"></lightning-input>
+    <lightning-input type="email" label="Email"></lightning-input>
+    <lightning-input type="phone" label="Mobile"></lightning-input>
+    <lightning-combobox name="Designation" label="Designation" value={value} placeholder="Select Progress" options={options} onchange={handleChange} ></lightning-combobox>
+    <lightning-input type="date" label="Earliest Availability Date"></lightning-input>
+    <lightning-input type="text" label="Address"></lightning-input>
+    <lightning-input type="text" label="City"></lightning-input>
+    <lightning-input type="text" label="Postal Code"></lightning-input>
+    <lightning-combobox name="Is Primary Contact" label="Is Primary Contact" value={value} placeholder="Select Progress" options={options} onchange={handleChange} ></lightning-combobox>
+    <lightning-input type="text" label="Is Primary Contact"></lightning-input>
+    <lightning-input type="text" label="Area of Practice"></lightning-input>
+    <p><b>Modals/Popup Box are used to display content in a layer above the app.
+    </b></p>
+    <p><b>This paradigm is used in cases such as the creation or editing of a record, as well as various types of messaging and wizards.
+    </b></p> -->
+</div>
+<!-- Modal/Popup Box LWC footer starts here -->
+<footer class="slds-modal__footer">
+    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+    <button class="slds-button slds-button_brand" onclick={handleSubmit} title="Submit">Submit</button>
+</footer>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>

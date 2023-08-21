@@ -1,0 +1,94 @@
+<template>
+  <lightning-card title={contactCountGetter} icon-name="custom:custom14">
+    
+    <!-- Top Left Buttons for Refresh and Create  -->
+    <lightning-button-icon icon-name="utility:refresh"  variant="border-filled" title="Refresh" class="slds-m-right_xx-small" slot="actions" onclick={refreshMethod}></lightning-button-icon>
+    <!-- <button class="slds-button slds-button_brand" onclick={filter} title="Search" slot="actions">Search</button> -->
+    <c-contact-account-form accid={accountid} slot="actions"></c-contact-account-form>
+    
+    <!-- <div class="slds-grid slds-gutters">
+      <div class="slds-col slds-p-around_large ">
+      <lightning-button-icon icon-name="utility:settings"  alternative-text="Settings" title="Settings"></lightning-button-icon>
+      <button class="slds-button slds-button_brand" onclick={filter} title="Search">Search</button>
+   </div>
+    </div> -->
+
+    <!-- <div>
+      <table class="contactTable tableRow tableHead">
+        <thead>
+          <tr>
+            <th class="tableHead">Name</th>
+            <th class="tableHead">Email</th>
+            <th class="tableHead">Designation</th>
+            <th class="tableHead">Phone</th>
+            <th class="tableHead">Is Primary Contact</th>
+            <th class="tableHead">Area of Practice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template for:each={contacts} for:item=contact>
+            <tr key={contact.Id}>
+              <td><a onclick={handleNavigateToContact} data-contid={contact.Id}>{contact.Name}</a></td>
+              <td>{contact.Email}</td>
+              <td>{contact.Designation__c}</td>
+              <td>{contact.Phone}</td>
+              <td>{contact.Is_Primary_Contact__c}</td>
+              <td>{contact.Area_of_Practice__c}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div> -->
+
+    <!-- start -->
+    <div>
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+        aria-label="Example table of Opportunities with vertical borders">
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Name">Name</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Email">Email</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Designation">Designation</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Phone">Phone</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="IsPrimaryContact">Is Primary Contact</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="AreaofPractice">Area of Practice</div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <template for:each={contacts} for:item=contact>
+            <tr key={contact.Id}>
+              <td><a onclick={handleNavigateToContact} data-contid={contact.Id}>{contact.Name}</a></td>
+              <td>{contact.Email}</td>
+              <td>{contact.Designation__c}</td>
+              <td>{contact.Phone}</td>
+              <td>{contact.Is_Primary_Contact__c}</td>
+              <td>{contact.Area_of_Practice__c}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+    <!-- end -->
+  </lightning-card>
+  
+  <div>
+
+  </div>
+
+  <lightning-card>
+    <p>Hello {accountid}</p>
+  </lightning-card>
+</template>
